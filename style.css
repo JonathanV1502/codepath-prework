@@ -21,6 +21,8 @@ button{
   width:200px;
   height:200px;
   margin:2px;
+  border-radius: 100px;
+  border:  none;
 }
 
 .hidden {
@@ -43,6 +45,14 @@ button{
     background: lightyellow;
 }
 
+#button5 {
+    background: lightgrey;
+}
+
+#button6 {
+    background: DarkSlateBlue;
+}
+
 #button1:active, #button1.lit {
     background:green;
 }
@@ -58,3 +68,12 @@ button{
 #button4:active, #button4.lit {
     background:yellow;
 }
+
+#button5:active, #button5.lit {
+    background:black;
+}
+
+#button6:active, #button6.lit {
+    background:DarkOrchid;
+}
+

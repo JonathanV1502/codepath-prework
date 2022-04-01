@@ -1,39 +1,47 @@
 // global constants
-const clueHoldTime = 1000; //how long to hold each clue's light/sound
-const cluePauseTime = 333; //how long to pause in between clues
+var clueHoldTime = 1000; //how long to hold each clue's light/sound
+var cluePauseTime = 333; //how long to pause in between clues
 const nextClueWaitTime = 1000; //how long to wait before starting playback of the clue sequence
 //Global Variables
-var pattern = [2, 2, 4, 3, 2, 1, 2, 4];
-//var pattern = [2, 2];
+//var pattern = [2, 2, 4, 3, 2, 1, 2, 4];
+var pattern = [2, 4, 3];
 var progress = 0; 
 var gamePlaying = false;
 var tonePlaying = false;
 var volume = 0.5;  //must be between 0.0 and 1.0
 var guessCounter = 0;
+var attemps = 3;
 
 
 function startGame(){
   //initialize game variables
+  setInterval(updateTimer, 1000);
+  time = 10;
+
   progress = 0;
   gamePlaying = true;
   // swap the Start and Stop buttons
   document.getElementById("startBtn").classList.add("hidden");
   document.getElementById("stopBtn").classList.remove("hidden");
   playClueSequence()
+  
 }
 
 function stopGame(){
   gamePlaying = false;
   document.getElementById("startBtn").classList.remove("hidden");
   document.getElementById("stopBtn").classList.add("hidden");
+
 }
 
 // Sound Synthesis Functions
 const freqMap = {
-  1: 261.6,
-  2: 329.6,
-  3: 392,
-  4: 466.2
+  1: 230,
+  2: 279,
+  3: 333,
+  4: 470,
+  5: 320,
+  6: 200
 }
 
 function playTone(btn,len){ 
@@ -103,6 +111,10 @@ function loseGame(){
   stopGame();
   alert("Game Over. You lost.");
 }
+function loseGameTime(){
+  stopGame();
+  alert("Game Over. You ran out of time.");
+}
 function winGame(){
   stopGame();
   alert("Game Over. You won!");
@@ -115,19 +127,74 @@ function guess(btn){
   }
   
   // add game logic here
-  if(btn == pattern[guessCounter]){
+  if(btn == pattern[guessCounter] && time > 0){
     if(guessCounter == progress){
-      if(progress == pattern.length - 1){
+      if(progress == pattern.length - 1 ){
         winGame();
+        pattern = newPattern(6, 4);
+        cluePauseTime= 333;
+        clueHoldTime =1000
       }else{
         progress++;
-        playClueSequence()
+        cluePauseTime-= 50;
+        clueHoldTime-=200
+        playClueSequence();
+        time = 10
       }
     }else{
       guessCounter++;
     }
   }else{
-    loseGame();
+    attemps--;
+    if(time < 0){
+      loseGameTime();
+      pattern = newPattern(6, 4);
+      cluePauseTime= 333;
+      clueHoldTime =1000
+      attemps = 3;
+      tryCounter();
+    }else if (attemps > 0){
+      tryCounter();
+    }else{ 
+      
+      loseGame();
+      pattern = newPattern(6, 4);
+      cluePauseTime= 333;
+      clueHoldTime =1000
+      attemps = 3;
+      tryCounter();
+    }
+    
   }
   
 }
+
+function newPattern(squares, lenght){
+  var nums = [];
+  for(var i = 0; i<lenght; i++){
+    nums.push(Math.floor(Math.random() * squares) + 1);
+  }
+  return nums;
+}
+
+function tryCounter(){
+  document.getElementById("attemptCounter").innerHTML = "You have "+ attemps + " attemps left";
+}
+
+var startTime = 1;
+var time = startTime * 10;
+const timer = document.getElementById("countDownTimer");
+
+function updateTimer(){
+  var secs = time % 60;
+  
+  secs = secs < 10 ? '0' + secs : secs
+  secs%= 11
+  timer.innerHTML = "You have "+ `${secs}`+ " seconds"
+  time--;
+  
+  
+
+}
+
+
