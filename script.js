@@ -11,11 +11,11 @@ var tonePlaying = false;
 var volume = 0.5;  //must be between 0.0 and 1.0
 var guessCounter = 0;
 var attemps = 3;
-
+setInterval(updateTimer, 1000);
 
 function startGame(){
   //initialize game variables
-  setInterval(updateTimer, 1000);
+  
   time = 10;
 
   progress = 0;
@@ -134,6 +134,7 @@ function guess(btn){
         pattern = newPattern(6, 4);
         cluePauseTime= 333;
         clueHoldTime =1000
+        time = 0;
       }else{
         progress++;
         cluePauseTime-= 50;
@@ -153,6 +154,7 @@ function guess(btn){
       clueHoldTime =1000
       attemps = 3;
       tryCounter();
+      time = 0;
     }else if (attemps > 0){
       tryCounter();
     }else{ 
@@ -163,6 +165,7 @@ function guess(btn){
       clueHoldTime =1000
       attemps = 3;
       tryCounter();
+      time = 0;
     }
     
   }
@@ -181,7 +184,7 @@ function tryCounter(){
   document.getElementById("attemptCounter").innerHTML = "You have "+ attemps + " attemps left";
 }
 
-var startTime = 1;
+var startTime = 0;
 var time = startTime * 10;
 const timer = document.getElementById("countDownTimer");
 
