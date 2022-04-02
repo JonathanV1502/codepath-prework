@@ -38,11 +38,13 @@ The following **additional** features are implemented:
 
 ## Video Walkthrough (GIF)
 
-If you recorded multiple GIFs for all the implemented features, you can add them here:
-![](gif1-link-here)
-![](gif2-link-here)
-![](gif3-link-here)
-![](gif4-link-here)
+### Win with mistake
+![](https://github.com/JonathanV1502/codepath-prework/blob/glitch/SitePreworkDemo_WinWithError.gif)
+### Loss from too many tries
+![](https://github.com/JonathanV1502/codepath-prework/blob/glitch/SitePreworkDemo_LossTooManyTrys.gif)
+### Loss from running out of time
+![](https://github.com/JonathanV1502/codepath-prework/blob/glitch/SitePreworkDemo_LossNoTime.gif)
+
 
 ## Reflection Questions
 1. If you used any outside resources to help complete your submission (websites, books, people, etc) list them here. 
