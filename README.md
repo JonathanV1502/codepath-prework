@@ -4,9 +4,9 @@
 
 Submitted by: **Jonathan Villarreal**
 
-Time spent: **6** hours spent in total
+Time spent: **7** hours spent in total
 
-Link to project: (insert your link here, should start with https://glitch.com...)
+Link to project: https://glitch.com/edit/#!/marked-lively-coreopsis?path=README.md%3A1%3A0
 
 ## Required Functionality
 
